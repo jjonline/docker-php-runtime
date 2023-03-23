@@ -1,6 +1,19 @@
 # source file  at: https://github.com/jjonline/docker-php-runtime
 # docker image at: https://hub.docker.com/r/jjonline/docker-php-runtime
+
+# define php version args
 ARG PHP_VERSION=7.2
+# define install Redis extension src
+ARG EXTENSION_REDIS_SRC=redis
+# define php extension GD build Option
+ARG GD_OPT=''
+# define install or not install php extension xlswriter
+ARG INSTALL_MYSQL_EXTENSION='mysql'
+# define install or not install php extension xlswriter
+ARG INSTALL_XLSWRITER_CMD='yes "" | pecl install xlswriter'
+# define enable php extension
+ARG ENABLE_EXTENSION_LIST='redis xlswriter'
+
 FROM php:$PHP_VERSION-fpm-alpine
 
 LABEL Maintainer="JeaYang<jjonline@jjonline.cn>" \
@@ -11,12 +24,24 @@ WORKDIR /srv
 
 # Install php extension supervisor and nginx
 RUN apk update && \
-	apk add libpng libpng-dev gmp gmp-dev zlib zlib-dev oniguruma oniguruma-dev libjpeg-turbo-dev libpng-dev freetype-dev libzip libzip-dev libxslt libxslt-dev supervisor nginx bash && \
-	docker-php-ext-configure gd --with-freetype-dir=/usr/lib/ --with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-gd && \
-	yes "" | pecl install redis && \
-	yes "" | pecl install xlswriter && \
-	docker-php-ext-install -j5 pcntl bcmath gd gmp mbstring mysqli pdo pdo_mysql opcache sockets xsl zip exif && \
-	docker-php-ext-enable redis xlswriter pcntl && \
+	apk add libpng libpng-dev \
+    gmp gmp-dev \
+    zlib zlib-dev  \
+    oniguruma oniguruma-dev  \
+    libjpeg-turbo-dev libpng-dev  \
+    freetype-dev libzip libzip-dev  \
+    libxslt libxslt-dev \
+    libxpm libxpm-dev \
+    libvpx libvpx-dev \
+    libwebp libwebp-dev \
+    supervisor nginx bash && \
+	docker-php-ext-configure gd $GD_OPT && \
+	yes "" | pecl install $EXTENSION_REDIS_SRC && \
+	$INSTALL_XLSWRITER_CMD && \
+	docker-php-ext-install -j5 pcntl bcmath gd gmp  \
+    mbstring mysqli $INSTALL_MYSQL_EXTENSION  \
+    pdo pdo_mysql opcache sockets xsl zip exif && \
+	docker-php-ext-enable $ENABLE_EXTENSION_LIST && \
 	rm -rf /var/cache/apk/* && \
 	rm -rf /etc/nginx/sites-enabled/* && \
 	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
