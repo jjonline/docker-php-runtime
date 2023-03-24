@@ -15,7 +15,7 @@ jobs:
             extension_redis_src: 'https://pecl.php.net/get/redis-4.3.0.tgz'
             gd_opt: '"--with-freetype-dir=/usr/lib/ --with-png-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-zlib-dir --with-xpm-dir --with-vpx-dir --with-gd"'
             install_mysql_extension: 'mysql'
-            install_xlswrite_cmd: '"echo ''do not install xlswriter when php version LG 5.0'''
+            install_xlswrite_cmd: '"echo ''do not install xlswriter when php version LG 5.0''"'
             enable_extension_list: 'redis'
             support_arch: 'linux/386,linux/amd64,linux/arm/v6,linux/arm64/v8,linux/ppc64le'
           - phpVersion: '7.2'
