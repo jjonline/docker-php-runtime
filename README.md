@@ -6,7 +6,7 @@
 Support multi arch and some mainstream version for php, added nginx and supervisor and preset installed composer2.
 
 * User: `www-data`
-* php: 7.2/7.4/8.0/8.1
+* php: 5.6/7.2/7.4/8.0/8.1/8.2
 * nginx
 * supervisor
 * php-fpm
