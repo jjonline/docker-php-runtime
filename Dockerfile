@@ -33,6 +33,7 @@ RUN apk update && \
     libxpm libxpm-dev \
     libvpx libvpx-dev \
     libwebp libwebp-dev \
+    linux-headers \
     supervisor nginx bash && \
     # ② configure and install pecl extension
     docker-php-ext-configure gd $gdOpt && \
