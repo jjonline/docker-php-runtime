@@ -340,7 +340,6 @@ SPL
 sqlite3
 standard
 tokenizer
-xlswriter
 xml
 xmlreader
 xmlwriter
