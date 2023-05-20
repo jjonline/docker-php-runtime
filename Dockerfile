@@ -8,20 +8,21 @@ ARG phpVersion='7.2'
 
 FROM php:$phpVersion-fpm-alpine
 
-# define install Redis extension src
-ARG extRedisSrc='redis'
-# define install Swoole extension src
-ARG extSwooleSrc='swoole'
-# define php extension GD build Option
-ARG gdOpt=''
-# define install or not install php extension xlswriter
-ARG installExtMysql='mysql'
+# define install extension info
+ARG extension=''
+# define install MySQL when php5
+ARG extMysql=''
+# define need enable extension
+ARG extEnable=''
 
 LABEL Maintainer="JeaYang<jjonline@jjonline.cn>" \
       Description="Nginx & PHP & FPM & Supervisor & Composer based on Alpine Linux support multi PHP version."
 
 # Basic workdir
 WORKDIR /srv
+
+# add installer
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
     # ① install lib and software
 RUN apk update && \
@@ -35,17 +36,15 @@ RUN apk update && \
     libxpm libxpm-dev \
     libvpx libvpx-dev \
     libwebp libwebp-dev \
-    openssl openssl-dev \
     linux-headers \
     supervisor nginx bash && \
-    # ② configure and install pecl extension
-    docker-php-ext-configure gd $gdOpt && \
-    yes "" | pecl install $extRedisSrc && \
-    yes "" | pecl install $extSwooleSrc && \
-    # ③ install built-in extension and enable some ext extension
-    docker-php-ext-install -j5 pcntl bcmath gd gmp mbstring $installExtMysql mysqli pdo pdo_mysql opcache sockets xsl zip exif && \
-    docker-php-ext-enable redis swoole && \
+    chmod +x /usr/local/bin/install-php-extensions && \
+    # ② install built-in extension
+    docker-php-ext-install -j5 pcntl bcmath gmp mbstring $extMysql mysqli pdo pdo_mysql opcache sockets xsl zip exif && \
+    # ③ install built-in extension
+    install-php-extensions $extension && \
+    docker-php-ext-enable $extEnable && \
     # ④ install composer2
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     # ⑤ clean
     rm -rf /var/cache/apk/* && rm -rf /etc/nginx/sites-enabled/*
