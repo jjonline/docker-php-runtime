@@ -35,7 +35,7 @@ jobs:
             # https://www.php.net/manual/zh/migration74.other-changes.php#migration74.other-changes.pkg-config
             gdOpt: '--with-freetype=/usr/lib/ --with-jpeg=/usr/lib/ --with-xpm --with-webp'
             installExtMysql: ''
-            extSwooleSrc: 'https://pecl.php.net/get/swoole-4.4.26.tgz'
+            extSwooleSrc: 'https://pecl.php.net/get/swoole-4.8.13.tgz'
             supportArch: 'linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x'
           - phpVersion: '8.0'
             extRedisSrc: 'redis'
