@@ -85,7 +85,6 @@ jobs:
           tags: jjonline/docker-php-runtime:${{ matrix.phpVersion }}-fpm-alpine-${{ steps.meta.outputs.version }},jjonline/docker-php-runtime:${{ matrix.phpVersion }}-fpm-alpine
           build-args: |
             phpVersion=${{ matrix.phpVersion }}
-            extRedisSrc=${{ matrix.extRedisSrc }}
-            extSwooleSrc=${{ matrix.extSwooleSrc }}
-            gdOpt=${{ matrix.gdOpt }}
-            installExtMysql=${{ matrix.installExtMysql }}
+            extMysql=${{ matrix.extMysql }}
+            extension=${{ matrix.extension }}
+            extEnable=${{ matrix.extEnable }}
