@@ -45,6 +45,6 @@ RUN apk update && \
     install-php-extensions $extension && \
     docker-php-ext-enable $extEnable && \
     # ④ install composer2
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     # ⑤ clean
     rm -rf /var/cache/apk/* && rm -rf /etc/nginx/sites-enabled/*
