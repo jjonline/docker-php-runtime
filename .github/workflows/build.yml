@@ -9,7 +9,7 @@ jobs:
   build-and-release:
     strategy:
       matrix:
-        phpVersion: [ "5.6", "7.2", "7.4", "8.0", "8.1", "8.2" ]
+        phpVersion: [ "5.6", "7.1", "7.2", "7.4", "8.0", "8.1", "8.2" ]
         include:
           - phpVersion: '5.6'
             extRedisSrc: 'https://pecl.php.net/get/redis-4.3.0.tgz'
