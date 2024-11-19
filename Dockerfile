@@ -14,7 +14,7 @@ ARG extRedisSrc='redis'
 ARG gdOpt=''
 # define install or not install php extension mysql
 ARG installExtMysql='mysql'
-# define install or not install php extension mbstring
+# define install or not install php extension mbstring, as php8.3 default install this extension
 ARG installExtMbString='mbstring'
 
 LABEL Maintainer="JeaYang<jjonline@jjonline.cn>" \
