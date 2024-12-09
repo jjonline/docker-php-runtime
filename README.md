@@ -37,6 +37,8 @@ You can see our [Dockerfile](./Dockerfile) get more detail
 | php8.2-fpm-alpine-vx.y.z | Latest PHP8.2 | 3.20           | with git release tag |
 | php8.3-fpm-alpine        | Latest PHP8.3 | 3.20           | recommended to use   |
 | php8.3-fpm-alpine-vx.y.z | Latest PHP8.3 | 3.20           | with git release tag |
+| php8.4-fpm-alpine        | Latest PHP8.4 | 3.20           | recommended to use   |
+| php8.4-fpm-alpine-vx.y.z | Latest PHP8.4 | 3.20           | with git release tag |
 
 ## Guidance
 
